@@ -17,5 +17,12 @@ module Torba
 
       refute_equal remote.digest, another_remote.digest
     end
+
+    def test_404
+      exception = assert_raises(Errors::ShellCommandFailed) do
+        RemoteSources::Zip.new("http://jquery.com/jquery.zip")["*"]
+      end
+      assert_includes exception.message, "curl"
+    end
   end
 end

@@ -39,7 +39,7 @@ module Torba
           Torba.ui.info "downloading '#{url}'"
 
           [
-            "curl -L -o #{tempfile.path} #{url}",
+            "curl -Lf -o #{tempfile.path} #{url}",
             "unzip -oqq -d #{cache_path} #{tempfile.path}",
           ].each do |command|
             system(command) || raise(Errors::ShellCommandFailed.new(command))
