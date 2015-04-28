@@ -63,16 +63,19 @@ module Torba
   # @yield a block, converts common exceptions into useful messages
   def self.pretty_errors
     yield
-  rescue Torba::Errors::UnbuiltPackage
+  rescue Errors::UnbuiltPackage
     ui.error "Your Torba is not packed yet."
     ui.suggest "Run `bundle exec torba pack` to install missing packages."
     exit(false)
-  rescue Torba::Errors::NothingToImport => e
+  rescue Errors::ShellCommandFailed => e
+    ui.error "Couldn't execute command '#{e.message}'"
+    exit(false)
+  rescue Errors::NothingToImport => e
     ui.error "Couldn't import an asset(-s) '#{e.path}' from import list in '#{e.package}'."
     ui.suggest "Check for typos."
     ui.suggest "Make sure that the path has trailing '/' if its a directory."
     exit(false)
-  rescue Torba::Errors::AssetNotFound => e
+  rescue Errors::AssetNotFound => e
     ui.error "Couldn't found an asset with path '#{e.message}'."
     ui.suggest "Make sure that you've imported all image assets mentioned in a stylesheet(-s)."
     exit(false)
