@@ -37,9 +37,15 @@ module Torba
     end
 
     # Adds {Package} with {RemoteSources::GithubRelease} to {#packages}
-    def gh_release(name, options = {})
+    def gh_release(name = nil, options = {})
+      if name.is_a?(Hash)
+        options, name = name, nil
+      end
+
       source = options.fetch(:source)
       tag = options.fetch(:tag)
+      name ||= source.split("/").last
+
       remote_source = RemoteSources::GithubRelease.new(source, tag)
       packages << Package.new(name, remote_source, options)
     end

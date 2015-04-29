@@ -129,6 +129,12 @@ i.e. with "v" prefix if present), more on "import" below. For example,
 gh_release "scroll_magic", source: "janpaepke/ScrollMagic", tag: "v.2.0.0"
 ```
 
+You can omit the name, it will be equal to the repository name:
+
+```
+gh_release source: "janpaepke/ScrollMagic", tag: "v.2.0.0" # "ScrollMagic" is assumed
+```
+
 ### "Packing the torba" process
 
 When you run `torba pack` the following happens:

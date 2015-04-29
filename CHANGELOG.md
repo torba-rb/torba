@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Enhancements
+
+* Name for GH releases can be optional
+
 ## Version 0.1.1
 
 ### Bug fixes
