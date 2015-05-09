@@ -13,14 +13,11 @@ module Torba
     class Zip
       include Common
 
-      attr_reader :url
+      attr_reader :url, :digest
 
       def initialize(url)
         @url = url
-      end
-
-      def digest
-        Torba.digest(url)
+        @digest = "#{File.basename url, '.zip'}-#{Torba.digest(url)}"
       end
 
       private

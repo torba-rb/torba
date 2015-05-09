@@ -3,6 +3,7 @@
 ### Enhancements
 
 * Name for GH releases can be optional
+* Cached zip remote contains URL filename in path for better introspection
 
 ### Bug fixes
 
