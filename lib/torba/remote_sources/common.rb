@@ -15,6 +15,8 @@ module Torba
         end
       end
 
+      # @return [String] unique short name used as a representation of the remote source.
+      #   Used by default as a cache folder name.
       def digest
         raise NotImplementedError
       end
