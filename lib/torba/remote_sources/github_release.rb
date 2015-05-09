@@ -12,11 +12,11 @@ module Torba
       attr_reader :source
 
       # @return [String]
-      # @since unreleased
+      # @since 0.2.0
       attr_reader :repository_name
 
       # @return [String]
-      # @since unreleased
+      # @since 0.2.0
       attr_reader :repository_user
 
       # @return [String] repository tag.

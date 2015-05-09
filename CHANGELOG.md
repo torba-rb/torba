@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 0.2.0
+
 ### Enhancements
 
 * Name for GH releases can be optional
