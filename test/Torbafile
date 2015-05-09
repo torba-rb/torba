@@ -1,3 +1,5 @@
+zip "trumbowyg-from-zip", url: "https://github.com/torba-rb/Trumbowyg/archive/1.1.6.zip", import: ["dist/trumbowyg.js"]
+
 gh_release "trumbowyg", source: "torba-rb/Trumbowyg", tag: "1.1.7", import: %w[
   dist/trumbowyg.js
   dist/ui/*.css
