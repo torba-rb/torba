@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 0.2.1
+
 ### Bug fixes
 
 * Cached GithubRelease remote contains in path repository name, not nameless
