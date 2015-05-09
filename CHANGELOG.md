@@ -4,6 +4,7 @@
 
 * Name for GH releases can be optional
 * Cached zip remote contains URL filename in path for better introspection
+* GithubRelease remote: introduce #repository_user, #repository_name
 
 ### Bug fixes
 

@@ -7,7 +7,17 @@ module Torba
       # @return [String] repository user and name.
       # @example
       #   "jashkenas/underscore"
+      # @see #repository_name
+      # @see #repository_user
       attr_reader :source
+
+      # @return [String]
+      # @since unreleased
+      attr_reader :repository_name
+
+      # @return [String]
+      # @since unreleased
+      attr_reader :repository_user
 
       # @return [String] repository tag.
       # @example
@@ -19,6 +29,7 @@ module Torba
       def initialize(source, tag)
         @source = source
         @tag = tag
+        @repository_user, @repository_name = source.split("/")
         super("https://github.com/#{source}/archive/#{tag}.zip")
       end
     end

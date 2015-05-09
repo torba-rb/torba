@@ -44,9 +44,9 @@ module Torba
 
       source = options.fetch(:source)
       tag = options.fetch(:tag)
-      name ||= source.split("/").last
-
       remote_source = RemoteSources::GithubRelease.new(source, tag)
+
+      name ||= remote_source.repository_name
       packages << Package.new(name, remote_source, options)
     end
 
