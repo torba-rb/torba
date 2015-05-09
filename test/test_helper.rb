@@ -1,8 +1,10 @@
 require "bundler/setup"
 require "torba"
+require "torba/remote_sources/common"
 
 require "minitest/autorun"
 require "tmpdir"
+require "fileutils"
 
 module Torba
   module Test
@@ -28,10 +30,30 @@ module Torba
         refute File.exists?(file_path)
       end
     end
+
+    module Touch
+      def touch(path)
+        FileUtils.mkdir_p(File.dirname(path))
+        FileUtils.touch(path)
+      end
+    end
+
+    class RemoteSource
+      include RemoteSources::Common
+
+      attr_reader :cache_path
+
+      def initialize(cache_path)
+        @cache_path = cache_path
+      end
+
+      def ensure_cached; end
+    end
   end
 end
 
 class Minitest::Test
   include Torba::Test::TempHome
   include Torba::Test::AssertExists
+  include Torba::Test::Touch
 end

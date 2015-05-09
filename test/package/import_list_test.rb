@@ -1,37 +1,17 @@
 require "test_helper"
-require "fileutils"
-require "torba/remote_sources/common"
 
 module Torba
   class PackageImportListTest < Minitest::Test
     def source_dir
-      @source_dir ||= begin
-        dir = File.join(Torba.home_path, "source")
-        FileUtils.mkdir_p(dir)
-        dir
-      end
+      @source_dir ||= File.join(Torba.home_path, "source")
     end
 
     def touch(path)
-      absolute_path = File.join(source_dir, path)
-      FileUtils.mkdir_p(File.dirname(absolute_path))
-      FileUtils.touch(absolute_path)
-    end
-
-    class RemoteSource
-      include RemoteSources::Common
-
-      attr_reader :cache_path
-
-      def initialize(cache_path)
-        @cache_path = cache_path
-      end
-
-      def ensure_cached; end
+      super File.join(source_dir, path)
     end
 
     def remote_source
-      @remote_source ||= RemoteSource.new(source_dir)
+      @remote_source ||= Test::RemoteSource.new(source_dir)
     end
 
     def test_single_file_path
