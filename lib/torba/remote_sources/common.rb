@@ -11,7 +11,7 @@ module Torba
         ensure_cached
 
         Dir.glob(File.join(cache_path, pattern)).reject{ |path| File.directory?(path) }.map do |path|
-          [path, path.sub(/#{cache_path}\/?/, "")]
+          [File.absolute_path(path), path.sub(/#{cache_path}\/?/, "")]
         end
       end
 
@@ -22,7 +22,7 @@ module Torba
       private
 
       def cache_path
-        raise NotImplementedError
+        @cache_path ||= File.join(Torba.cache_path, digest)
       end
 
       def ensure_cached

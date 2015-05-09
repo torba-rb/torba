@@ -25,10 +25,6 @@ module Torba
 
       private
 
-      def cache_path
-        @cache_path ||= File.join(Torba.cache_path, digest)
-      end
-
       def ensure_cached
         unless Dir.exist?(cache_path)
           FileUtils.mkdir_p(cache_path)

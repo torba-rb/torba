@@ -10,7 +10,7 @@ module Torba
   module Test
     module TempHome
       def before_setup
-        Torba.home_path = @_torba_tmp_dir = Dir.mktmpdir("torba")
+        Torba.home_path = @_torba_tmp_dir = File.realpath(Dir.mktmpdir("torba"))
         super
       end
 
