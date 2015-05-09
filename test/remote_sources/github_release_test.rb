@@ -25,5 +25,18 @@ module Torba
     def test_url
       assert_equal "https://github.com/user/repo/archive/v.2.0.0.zip", remote.url
     end
+
+    def test_unique_digest
+      remote = RemoteSources::GithubRelease.new("user/repo", "v.2.0.0")
+      same_remote = RemoteSources::GithubRelease.new("user/repo", "v.2.0.0")
+      assert_equal remote.digest, same_remote.digest
+
+      another_remote = RemoteSources::GithubRelease.new("another/repo", "v.2.0.0")
+      refute_equal remote.digest, another_remote.digest
+    end
+
+    def test_digest_contains_repository_name
+      assert_match /^repo-/, remote.digest
+    end
   end
 end

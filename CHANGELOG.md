@@ -1,5 +1,10 @@
 ## Unreleased
 
+### Bug fixes
+
+* Cached GithubRelease remote contains in path repository name, not nameless
+  version
+
 ## Version 0.2.0
 
 ### Enhancements

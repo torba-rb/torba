@@ -31,6 +31,7 @@ module Torba
         @tag = tag
         @repository_user, @repository_name = source.split("/")
         super("https://github.com/#{source}/archive/#{tag}.zip")
+        @digest = "#{repository_name}-#{Torba.digest(url)}"
       end
     end
   end
