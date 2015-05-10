@@ -5,7 +5,7 @@ module Torba
 
   # Represents a list of assets to be imported from a remote source.
   class ImportList
-    class Asset < Struct.new(:absolute_path, :subpath)
+    class Asset < Struct.new(:absolute_path, :logical_path)
       def css?
         absolute_path.end_with?(".css")
       end

@@ -20,7 +20,7 @@ module Torba
       list = Package.new("package", remote_source, import: ["hello.js"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "hello.js", item.subpath
+      assert_equal "package/hello.js", item.logical_path
       assert_equal File.join(source_dir, "hello.js"), item.absolute_path
     end
 
@@ -30,7 +30,7 @@ module Torba
       list = Package.new("package", remote_source, import: ["build/hello.js"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "hello.js", item.subpath
+      assert_equal "package/hello.js", item.logical_path
       assert_equal File.join(source_dir, "build/hello.js"), item.absolute_path
 
       touch("build/standalone/hello.js")
@@ -38,7 +38,7 @@ module Torba
       list = Package.new("package", remote_source, import: ["build/standalone/hello.js"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "hello.js", item.subpath
+      assert_equal "package/hello.js", item.logical_path
       assert_equal File.join(source_dir, "build/standalone/hello.js"), item.absolute_path
     end
 
@@ -48,14 +48,14 @@ module Torba
       list = Package.new("package", remote_source, import: ["build/"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "standalone/hello.js", item.subpath
+      assert_equal "package/standalone/hello.js", item.logical_path
       assert_equal File.join(source_dir, "build/standalone/hello.js"), item.absolute_path
 
 
       list = Package.new("package", remote_source, import: ["build/standalone/"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "hello.js", item.subpath
+      assert_equal "package/hello.js", item.logical_path
       assert_equal File.join(source_dir, "build/standalone/hello.js"), item.absolute_path
     end
 
@@ -67,11 +67,11 @@ module Torba
       assert_equal 2, list.assets.size
 
       first_item = list.assets[0]
-      assert_equal "images/first.png", first_item.subpath
+      assert_equal "package/images/first.png", first_item.logical_path
       assert_equal File.join(source_dir, "build/images/first.png"), first_item.absolute_path
 
       second_item = list.assets[1]
-      assert_equal "images/second.png", second_item.subpath
+      assert_equal "package/images/second.png", second_item.logical_path
       assert_equal File.join(source_dir, "build/images/second.png"), second_item.absolute_path
     end
 
@@ -83,11 +83,11 @@ module Torba
       assert_equal 2, list.assets.size
 
       first_item = list.assets[0]
-      assert_equal "one.jpg", first_item.subpath
+      assert_equal "package/one.jpg", first_item.logical_path
       assert_equal File.join(source_dir, "images/one.jpg"), first_item.absolute_path
 
       second_item = list.assets[1]
-      assert_equal "script.js", second_item.subpath
+      assert_equal "package/script.js", second_item.logical_path
       assert_equal File.join(source_dir, "js/script.js"), second_item.absolute_path
     end
 
@@ -98,13 +98,13 @@ module Torba
       list = Package.new("package", remote_source, import: ["**/*.{js,coffee}"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "js/hello.js", item.subpath
+      assert_equal "package/js/hello.js", item.logical_path
       assert_equal File.join(source_dir, "js/hello.js"), item.absolute_path
 
       list = Package.new("package", remote_source, import: ["build/**/*.css"]).import_list
       assert_equal 1, list.assets.size
       item = list.assets.first
-      assert_equal "css/bye.css", item.subpath
+      assert_equal "package/css/bye.css", item.logical_path
       assert_equal File.join(source_dir, "build/css/bye.css"), item.absolute_path
     end
 

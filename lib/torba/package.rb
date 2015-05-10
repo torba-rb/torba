@@ -126,7 +126,7 @@ module Torba
               relative_path.sub(path_wo_glob_metacharacters, "")
             end
 
-          ImportList::Asset.new(absolute_path, subpath)
+          ImportList::Asset.new(absolute_path, with_namespace(subpath))
         end
 
         if assets.empty?
@@ -145,10 +145,10 @@ module Torba
 
         new_content = CssUrlToErbAssetPath.call(content, asset.absolute_path) do |image_file_path|
           image_asset = import_list.find_by_absolute_path(image_file_path)
-          with_namespace(image_asset.subpath)
+          image_asset.logical_path
         end
 
-        new_absolute_path = File.join(load_path, with_namespace(asset.subpath + ".erb"))
+        new_absolute_path = File.join(load_path, asset.logical_path + ".erb")
         ensure_directory(new_absolute_path)
         File.write(new_absolute_path, new_content)
       end
@@ -156,7 +156,7 @@ module Torba
 
     def process_other_assets
       import_list.non_css_assets.each do |asset|
-        new_absolute_path = File.join(load_path, with_namespace(asset.subpath))
+        new_absolute_path = File.join(load_path, asset.logical_path)
         ensure_directory(new_absolute_path)
         FileUtils.cp(asset.absolute_path, new_absolute_path)
       end
