@@ -5,6 +5,10 @@ require "torba/manifest"
 
 # @since 0.1.0
 module Torba
+  module Errors
+    ShellCommandFailed = Class.new(StandardError)
+  end
+
   # @return [String] root path to prepared asset packages. By default it's ".torba" within
   #   your OS home directory (i.e. packages are shared between projects).
   # @note use "TORBA_HOME_PATH" env variable to override default value

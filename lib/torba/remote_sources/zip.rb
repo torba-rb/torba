@@ -1,13 +1,9 @@
-require "tempfile"
 require "fileutils"
 
 require "torba/remote_sources/common"
+require "torba/remote_sources/get_file"
 
 module Torba
-  module Errors
-    ShellCommandFailed = Class.new(StandardError)
-  end
-
   module RemoteSources
     # Represents remote zip archive.
     class Zip
@@ -26,17 +22,10 @@ module Torba
         unless Dir.exist?(cache_path)
           FileUtils.mkdir_p(cache_path)
 
-          tempfile = Tempfile.new("torba")
-          tempfile.close
+          tempfile = GetFile.process(url)
 
-          Torba.ui.info "downloading '#{url}'"
-
-          [
-            "curl -Lf -o #{tempfile.path} #{url}",
-            "unzip -oqq -d #{cache_path} #{tempfile.path}",
-          ].each do |command|
-            system(command) || raise(Errors::ShellCommandFailed.new(command))
-          end
+          command = "unzip -oqq -d #{cache_path} #{tempfile.path}"
+          system(command) || raise(Errors::ShellCommandFailed.new(command))
 
           get_rid_of_top_level_directory
         end
