@@ -23,6 +23,15 @@ module Torba
       assert_equal "http://angularjs.com/angularjs.zip", remote.url
     end
 
+    def test_targz
+      manifest.targz "angular", url: "http://angularjs.com/angularjs.targz"
+
+      assert_equal 1, manifest.packages.size
+      assert_equal "angular", package.name
+      assert_instance_of RemoteSources::Targz, remote
+      assert_equal "http://angularjs.com/angularjs.targz", remote.url
+    end
+
     def test_zip_wo_url
       assert_raises(KeyError) do
         manifest.zip "angular"

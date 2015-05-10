@@ -5,6 +5,7 @@
 * Rails setup automatically populates `Rails.application.config.assets.precompile`
   If libraries added via Torba have image/font content, you can remove it from
   that list, no need for manual manipulation
+* Support .tar.gz remote sources
 
 ## Version 0.2.1
 

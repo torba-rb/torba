@@ -44,6 +44,8 @@ Problems with the Bower:
 
 * curl
 * unzip
+* gzip
+* tar
 
 ## Design limitations
 
@@ -96,7 +98,7 @@ If any changes made to the Torbafile, run `bundle exec torba pack` again.
 Torbafile is an assets specification. It is a plain text file that contains one or more
 sections, each of them describes one remote source of assets.
 
-Currently only zip archives and [Github releases][github-releases] are supported.
+Currently only zip, tar.gz archives and [Github releases][github-releases] are supported.
 
 #### Zip archive package
 
@@ -112,6 +114,20 @@ where "name" is an arbitrary name for the package, more on "import" below. For e
 
 ```
 zip "scroll_magic", url: "https://github.com/janpaepke/ScrollMagic/archive/v2.0.0.zip"
+```
+
+#### Tar.gz archive package
+
+The syntax is same as for a zip package:
+
+```
+targz "name", url: "..." [, import: %w(...)]
+```
+
+for example,
+
+```
+targz "scroll_magic", url: "https://github.com/janpaepke/ScrollMagic/archive/v2.0.0.tar.gz"
 ```
 
 #### Github release package

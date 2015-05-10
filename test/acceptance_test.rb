@@ -38,6 +38,11 @@ module Torba
       css = read "trumbowyg/trumbowyg.css.erb"
       assert_includes css, "background: transparent url('<%= asset_path('trumbowyg/icons.png') %>') no-repeat;"
       assert_includes css, "background-image: url('<%= asset_path('trumbowyg/icons-2x.png') %>')"
+
+      refute_exists "trumbowyg-from-tar/trumbowyg.js"
+      assert_exists "trumbowyg-from-tar/trumbowyg.css.erb"
+      assert_exists "trumbowyg-from-tar/images/icons.png"
+      assert_exists "trumbowyg-from-tar/images/icons-2x.png"
     end
   end
 end

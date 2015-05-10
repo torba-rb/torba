@@ -5,3 +5,5 @@ gh_release "trumbowyg", source: "torba-rb/Trumbowyg", tag: "1.1.7", import: %w[
   dist/ui/*.css
   dist/ui/images/
 ]
+
+targz "trumbowyg-from-tar", url: "https://github.com/torba-rb/Trumbowyg/archive/1.1.7.tar.gz", import: ["dist/ui/"]
