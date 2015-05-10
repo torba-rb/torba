@@ -17,7 +17,7 @@ Not tested in production.
 
 ## Documentation
 
-http://rubydoc.info/github/torba-rb/torba/
+[Released version](http://rubydoc.info/gems/torba/0.2.1)
 
 ## Why
 
