@@ -9,6 +9,10 @@ module Torba
       def css?
         absolute_path.end_with?(".css")
       end
+
+      def js?
+        absolute_path.end_with?(".js")
+      end
     end
 
     # @return [Array<Asset>] full list of assets to be imported.
@@ -33,6 +37,13 @@ module Torba
     # @return [Array<Asset>] list of assets to be imported except stylesheets.
     def non_css_assets
       assets.find_all { |asset| !asset.css? }
+    end
+
+    # @return [Array<Asset>] list of assets to be imported except javascripts and
+    #   stylesheets.
+    # @since unreleased
+    def non_js_css_assets
+      assets.find_all { |asset| !(asset.js? || asset.css?) }
     end
   end
 end

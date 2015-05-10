@@ -87,6 +87,8 @@ it config/application.rb
 3. Add "require" [Sprockets directives][sprockets-directives] to your "application.js"
 and/or "@import" [Sass directives][sass-import] to "application.css".
 
+4. Non JS/CSS assets are automatically added to precompile list, nothing to do here.
+
 If any changes made to the Torbafile, run `bundle exec torba pack` again.
 
 ### Torbafile
@@ -204,6 +206,11 @@ gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", imp
 
 In addition to this "path/" is treated as a shortcut for "path/**/*" glob pattern.
 
+Be careful to **import only that you really need**. Everything that is non JS or CSS asset is
+going to be precompiled by Sprockets and accessible publicly. See [Rails ticket][rails-ticket-vendoring]
+that explains this problem (and why Rails >= 4 precompiles only application.js/css in vendor by
+default), except that Torba does have a way to specify exact list of files to import.
+
 
 [bower]: http://bower.io/
 [sprockets]: https://github.com/rails/sprockets/
@@ -215,3 +222,4 @@ In addition to this "path/" is treated as a shortcut for "path/**/*" glob patter
 [rails-assets]: https://rails-assets.org/
 [bower-rails]: https://github.com/rharriso/bower-rails
 [semver]: http://semver.org/
+[rails-ticket-vendoring]: https://github.com/rails/rails/pull/7968

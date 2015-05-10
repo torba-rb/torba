@@ -55,5 +55,16 @@ module Torba
         manifest.gh_release "underscore", source: "jashkenas/underscore"
       end
     end
+
+    def test_non_js_css_logical_paths
+      manifest.zip "angular", url: "http://angularjs.com/angularjs.zip"
+      manifest.zip "backbone", url: "http://backbonejs.com/backbonejs.zip"
+
+      manifest.packages[0].stub :non_js_css_logical_paths, ["angular.png"] do
+        manifest.packages[1].stub :non_js_css_logical_paths, ["backbone.png"] do
+          assert_equal %w[angular.png backbone.png], manifest.non_js_css_logical_paths
+        end
+      end
+    end
   end
 end

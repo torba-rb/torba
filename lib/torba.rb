@@ -46,6 +46,12 @@ module Torba
     manifest.load_path
   end
 
+  # @see Manifest#non_js_css_logical_paths
+  # @since unreleased
+  def self.non_js_css_logical_paths
+    manifest.non_js_css_logical_paths
+  end
+
   # @see Manifest#verify
   def self.verify
     manifest.verify

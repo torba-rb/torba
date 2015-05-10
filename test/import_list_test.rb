@@ -35,5 +35,11 @@ module Torba
       list = ImportList.new([js_asset, css_asset])
       assert [js_asset], list.non_css_assets
     end
+
+    def test_non_js_css_assets
+      img_asset = ImportList::Asset.new("/dir/image.png", "image.png")
+      list = ImportList.new([js_asset, css_asset, img_asset])
+      assert [img_asset], list.non_js_css_assets
+    end
   end
 end

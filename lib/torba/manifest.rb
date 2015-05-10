@@ -62,6 +62,19 @@ module Torba
       packages.map(&:load_path)
     end
 
+    # @return [Array<String>] logical paths that packages contain except JS ans CSS.
+    #   It should be appended to the Sprockets' precompile list. Packages' JS and CSS
+    #   are meant to be included into application.js/.css and not to be compiled
+    #   alone (you can add them by hand though).
+    # @note Avoid importing everything from a package as it'll be precompiled and accessible
+    #   publicly.
+    # @see Package#import_paths
+    # @see Package#non_js_css_logical_paths
+    # @since unreleased
+    def non_js_css_logical_paths
+      packages.flat_map(&:non_js_css_logical_paths)
+    end
+
     # Verifies all {#packages}
     # @return [void]
     def verify

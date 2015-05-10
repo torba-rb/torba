@@ -37,6 +37,9 @@ module Torba
     #   ["build/*.js", "**/*.css"]
     # @example Any file within directory (including subdirectories)
     #   ["build/"] # same as ["build/**/*"]
+    # @note Put in this list only files that are absolutely necessary to you as
+    #   {Manifest#non_js_css_logical_paths} depends on it.
+    # @see #build
     attr_reader :import_paths
 
     # @param name [String] see {#name}
@@ -90,6 +93,20 @@ module Torba
     #   {Torba.home_path} directory.
     def load_path
       @load_path ||= File.join(Torba.home_path, folder_name)
+    end
+
+    # @return [Array<String>] {https://github.com/rails/sprockets#logical-paths logical paths} that
+    #   the package contains.
+    # @since unreleased
+    def logical_paths
+      import_list.assets.map(&:logical_path)
+    end
+
+    # @return [Array<String>] {https://github.com/rails/sprockets#logical-paths logical paths} that the
+    #   package contains except JS ans CSS.
+    # @since unreleased
+    def non_js_css_logical_paths
+      import_list.non_js_css_assets.map(&:logical_path)
     end
 
     # @return [ImportList]
