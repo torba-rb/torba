@@ -1,6 +1,6 @@
 module Torba
   # Parses content of CSS file and converts its image assets paths into Sprockets'
-  # {https://github.com/sstephenson/sprockets#logical-paths logical paths}.
+  # {https://github.com/rails/sprockets#logical-paths logical paths}.
   class CssUrlToErbAssetPath
     URL_RE =
       /

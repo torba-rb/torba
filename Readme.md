@@ -206,11 +206,11 @@ In addition to this "path/" is treated as a shortcut for "path/**/*" glob patter
 
 
 [bower]: http://bower.io/
-[sprockets]: https://github.com/sstephenson/sprockets/
-[sprockets-load-path]: https://github.com/sstephenson/sprockets#the-load-path
+[sprockets]: https://github.com/rails/sprockets/
+[sprockets-load-path]: https://github.com/rails/sprockets#the-load-path
 [torba-pronounce]: http://upload.wikimedia.org/wikipedia/commons/2/28/Uk-%D1%82%D0%BE%D1%80%D0%B1%D0%B0.ogg
 [github-releases]: https://help.github.com/articles/about-releases/
-[sprockets-directives]: https://github.com/sstephenson/sprockets#the-directive-processor
+[sprockets-directives]: https://github.com/rails/sprockets#the-directive-processor
 [sass-import]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import
 [rails-assets]: https://rails-assets.org/
 [bower-rails]: https://github.com/rharriso/bower-rails
