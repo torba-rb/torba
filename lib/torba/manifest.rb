@@ -2,6 +2,7 @@ require "torba/package"
 require "torba/remote_sources/zip"
 require "torba/remote_sources/github_release"
 require "torba/remote_sources/targz"
+require "torba/remote_sources/npm"
 
 module Torba
   # Represents Torbafile.
@@ -56,6 +57,21 @@ module Torba
     def targz(name, options = {})
       url = options.fetch(:url)
       remote_source = RemoteSources::Targz.new(url)
+      packages << Package.new(name, remote_source, options)
+    end
+
+    # Adds {Package} with {RemoteSources::Npm} to {#packages}
+    # @since unreleased
+    def npm(name = nil, options = {})
+      if name.is_a?(Hash)
+        options, name = name, nil
+      end
+
+      package_name = options.fetch(:package)
+      version = options.fetch(:version)
+      remote_source = RemoteSources::Npm.new(package_name, version)
+
+      name ||= remote_source.package
       packages << Package.new(name, remote_source, options)
     end
 

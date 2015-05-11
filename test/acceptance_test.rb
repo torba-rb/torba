@@ -75,5 +75,13 @@ module Torba
       assert_includes css, "background: transparent url('<%= asset_path('trumbowyg-from-tar/images/icons.png') %>') no-repeat;"
       assert_includes css, "background-image: url('<%= asset_path('trumbowyg-from-tar/images/icons-2x.png') %>')"
     end
+
+    def test_npm
+      pack_torbafile <<-TORBA
+        npm "lo_dash", package: "lodash", version: "0.1.0", import: ["lodash.js"]
+      TORBA
+
+      assert_exists "lo_dash/lodash.js"
+    end
   end
 end

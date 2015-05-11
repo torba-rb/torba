@@ -98,7 +98,8 @@ If any changes made to the Torbafile, run `bundle exec torba pack` again.
 Torbafile is an assets specification. It is a plain text file that contains one or more
 sections, each of them describes one remote source of assets.
 
-Currently only zip, tar.gz archives and [Github releases][github-releases] are supported.
+Currently only zip, tar.gz archives, [Github releases][github-releases] and
+[npm packages][npm] are supported.
 
 #### Zip archive package
 
@@ -151,6 +152,29 @@ You can omit the name, it will be equal to the repository name:
 
 ```
 gh_release source: "janpaepke/ScrollMagic", tag: "v.2.0.0" # "ScrollMagic" is assumed
+```
+
+#### npm package
+
+Allows to download packages from npm registry.
+
+The syntax is:
+
+```
+npm "name", package: "...", version: "..." [, import: %w(...)]
+```
+
+where "package" is the package name as published on npm registry and "version" is its version,
+more on "import" below. For example,
+
+```
+npm "coffee", package: "coffee-script", version: "1.9.2"
+```
+
+You can omit the name, it will be equal to the package name:
+
+```
+npm package: "coffee-script", version: "1.9.2"
 ```
 
 ### "Packing the torba" process
@@ -239,3 +263,4 @@ default), except that Torba does have a way to specify exact list of files to im
 [bower-rails]: https://github.com/rharriso/bower-rails
 [semver]: http://semver.org/
 [rails-ticket-vendoring]: https://github.com/rails/rails/pull/7968
+[npm]: https://npmjs.com

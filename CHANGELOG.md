@@ -6,6 +6,7 @@
   If libraries added via Torba have image/font content, you can remove it from
   that list, no need for manual manipulation
 * Support .tar.gz remote sources
+* Support npm packages
 
 ## Version 0.2.1
 

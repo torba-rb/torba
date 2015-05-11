@@ -65,6 +65,33 @@ module Torba
       end
     end
 
+    def test_npm
+      manifest.npm "coffee", package: "coffee-script", version: "1.8.3"
+
+      assert_equal 1, manifest.packages.size
+      assert_equal "coffee", package.name
+      assert_instance_of RemoteSources::Npm, remote
+      assert_equal "coffee-script", remote.package
+      assert_equal "1.8.3", remote.version
+    end
+
+    def test_npm_implicit_name
+      manifest.npm package: "coffee-script", version: "1.8.3"
+      assert_equal "coffee-script", package.name
+    end
+
+    def test_npm_wo_package
+      assert_raises(KeyError) do
+        manifest.npm version: "1.8.3"
+      end
+    end
+
+    def test_npm_wo_version
+      assert_raises(KeyError) do
+        manifest.npm package: "underscore"
+      end
+    end
+
     def test_non_js_css_logical_paths
       manifest.zip "angular", url: "http://angularjs.com/angularjs.zip"
       manifest.zip "backbone", url: "http://backbonejs.com/backbonejs.zip"
