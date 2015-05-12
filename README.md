@@ -13,7 +13,7 @@ of a JS/CSS library and puts it under Sprockets' [load path][sprockets-load-path
 
 ## Status
 
-Not tested in production.
+Production ready.
 
 ## Documentation
 
@@ -251,6 +251,12 @@ going to be precompiled by Sprockets and accessible publicly. See [Rails ticket]
 that explains this problem (and why Rails >= 4 precompiles only application.js/css in vendor by
 default), except that Torba does have a way to specify exact list of files to import.
 
+## Deployment
+
+1. Specify `TORBA_HOME_PATH` env variable pointing to a persistent directory writable by your
+   deploy user. For Capistrano it should be `shared/`.
+2. Add `bundle exec torba pack` to your deployment script right after `bundle install`. It's safe
+   and fairly cheap to run it unconditionally on each deployment.
 
 [bower]: http://bower.io/
 [sprockets]: https://github.com/rails/sprockets/
