@@ -59,7 +59,7 @@ module Torba
       assert_includes css, "background-image: url('<%= asset_path('trumbowyg/icons-2x.png') %>')"
     end
 
-    def test_pack
+    def test_targz
       pack_torbafile <<-TORBA
         targz "trumbowyg-from-tar",
         url: "https://github.com/torba-rb/Trumbowyg/archive/1.1.7.tar.gz",
