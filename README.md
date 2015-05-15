@@ -200,7 +200,7 @@ duplication:
     //= require 'underscore/underscore'
     ```
 
-    Hint: use "require_directory" if you strongly against such duplication:
+    Hint: use "require_directory" if you're strongly against such duplication:
 
     ```javascript
     //= require_directory 'underscore'
@@ -229,7 +229,7 @@ gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", imp
 ```
 
 Such files will be copied directly to the package root (i.e. file tree becomes flatten), thus you
-can omit unnesseccary paths:
+can omit unnecessary paths:
 
 ```css
 @import 'lightslider/lightslider';
