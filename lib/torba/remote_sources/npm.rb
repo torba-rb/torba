@@ -3,7 +3,7 @@ require "torba/remote_sources/targz"
 module Torba
   module RemoteSources
     # Represents {https://npmjs.com npm package}.
-    # @since unreleased
+    # @since 0.3.0
     class Npm < Targz
       # @return [String] package name.
       # @example

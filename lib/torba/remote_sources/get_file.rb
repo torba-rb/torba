@@ -3,7 +3,7 @@ require "tempfile"
 module Torba
   module RemoteSources
     # File downloading abstraction
-    # @since unreleased
+    # @since 0.3.0
     class GetFile
       # @param url [String] to be downloaded.
       # @return [Tempfile] temporarily stored content of the URL.

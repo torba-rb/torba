@@ -97,14 +97,14 @@ module Torba
 
     # @return [Array<String>] {https://github.com/rails/sprockets#logical-paths logical paths} that
     #   the package contains.
-    # @since unreleased
+    # @since 0.3.0
     def logical_paths
       import_list.assets.map(&:logical_path)
     end
 
     # @return [Array<String>] {https://github.com/rails/sprockets#logical-paths logical paths} that the
     #   package contains except JS ans CSS.
-    # @since unreleased
+    # @since 0.3.0
     def non_js_css_logical_paths
       import_list.non_js_css_assets.map(&:logical_path)
     end

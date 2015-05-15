@@ -6,7 +6,7 @@ require "torba/remote_sources/get_file"
 module Torba
   module RemoteSources
     # Represents remote tar.gz archive.
-    # @since unreleased
+    # @since 0.3.0
     class Targz
       include Common
 

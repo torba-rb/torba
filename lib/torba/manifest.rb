@@ -53,7 +53,7 @@ module Torba
     end
 
     # Adds {Package} with {RemoteSources::Targz} to {#packages}
-    # @since unreleased
+    # @since 0.3.0
     def targz(name, options = {})
       url = options.fetch(:url)
       remote_source = RemoteSources::Targz.new(url)
@@ -61,7 +61,7 @@ module Torba
     end
 
     # Adds {Package} with {RemoteSources::Npm} to {#packages}
-    # @since unreleased
+    # @since 0.3.0
     def npm(name = nil, options = {})
       if name.is_a?(Hash)
         options, name = name, nil
@@ -95,7 +95,7 @@ module Torba
     #   publicly.
     # @see Package#import_paths
     # @see Package#non_js_css_logical_paths
-    # @since unreleased
+    # @since 0.3.0
     def non_js_css_logical_paths
       packages.flat_map(&:non_js_css_logical_paths)
     end

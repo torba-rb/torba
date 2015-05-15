@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 0.3.0
+
 ### Enhancements
 
 * Rails setup automatically populates `Rails.application.config.assets.precompile`

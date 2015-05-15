@@ -41,7 +41,7 @@ module Torba
 
     # @return [Array<Asset>] list of assets to be imported except javascripts and
     #   stylesheets.
-    # @since unreleased
+    # @since 0.3.0
     def non_js_css_assets
       assets.find_all { |asset| !(asset.js? || asset.css?) }
     end

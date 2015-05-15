@@ -51,7 +51,7 @@ module Torba
   end
 
   # @see Manifest#non_js_css_logical_paths
-  # @since unreleased
+  # @since 0.3.0
   def self.non_js_css_logical_paths
     manifest.non_js_css_logical_paths
   end
