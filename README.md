@@ -21,24 +21,22 @@ Production ready.
 
 ## Why
 
-De facto approach, i.e. wrapping JS and CSS libraries in a gem, requires from a
-maintainer to constantly track changes in upstream repository. Even more, if the
-maintainer stops using this gem itself, it will eventually become abandoned.
-Many libraries still have no gem wrappers.
+De facto approach, i.e. wrapping JS and CSS libraries in a gem, requires a
+maintainer to constantly track changes in an upstream repository. Even more so, if a gem
+maintainer stops using that specific library, the gem will eventually become abandoned.
+Additionally, many libraries still have no gem wrappers.
 
-Among other alternatives:
+Other alternatives:
 
-* [rails-assets][rails-assets] project relies on Bower *and* it is quite complex,
-* [bower-rails][bower-rails] project relies on Bower.
+* [rails-assets][rails-assets] relies on Bower *and* it is quite complex,
+* [bower-rails][bower-rails] relies on Bower, see below for why this can be an issue.
 
 Problems with the Bower:
 
-* it is not a part of Ruby ecosystem,
-* frontend JS libraries are usually standalone (except for jQuery dependency), so there's
-  no need for complex Bundler-like solution with tree-dependency resolution,
-* often we can't use optimistic version constraints, because JS community still doesn't
-  fully grasp the idea of [Semver][semver]. By specifying strict versions we use Bower
-  as a complex facade for functionality that could be done by curl.
+* it is not a part of the Ruby ecosystem,
+* frontend JS libraries are usually standalone (except for a potential jQuery dependency), so there's
+  no need for a complex Bundler-like solution with tree-dependency resolution,
+* often we can't use optimistic version constraints, because the JavaScript community does not consistenly apply the principles of [Semver][semver]. By specifying strict versions we use Bower as a complex facade for functionality that could be accomplished with curl.
 
 ## External dependencies
 
@@ -49,9 +47,9 @@ Problems with the Bower:
 
 ## Design limitations
 
-* Torba doesn't do any version dependency resolution, it's up to you to specify correct version of
+* Torba doesn't do any version dependency resolution, it's up to you to specify the correct version of
   each asset package,
-* Torba doesn't do any builds, use remote sources with pre-built assets.
+* Torba doesn't do any builds, you should use remote sources with pre-built assets.
 
 ## Installation
 
@@ -183,16 +181,16 @@ When you run `torba pack` the following happens:
 
 1.  All remote sources are cached locally.
 
-2.  Archives are unpacked with top level directory removed. This is done for good cause it
-usually contains package version, e.g. "react-0.13.2", and you don't want to reference versions
+2.  Archives are unpacked with top level directory removed. This is done for good because it
+usually contains the package version in the name, e.g. "react-0.13.2", and you don't want to have to reference versions
 inside your application code (except Torbafile).
 
 3.  Remote source's content is copied as is to the `Torba.home_path` location with **package name used
 as a namespace**.
 
-    This is also done for good in order to avoid name collisions (since many JS projects can have
-assets with the same names and all packages are placed into shared Sprockets' virtual filesystem).
-The downside is that you have to use namespace in each require directive, which can lead to
+    This is also done for good reason in order to avoid name collisions (since many JS projects can have
+assets with the same names and all packages are placed into Sprockets' shared virtual filesystem).
+The downside is that you have to use namespaces in each require directive, which can lead to
 duplication:
 
     ```javascript
@@ -211,8 +209,8 @@ statements.
 
 ### :import option
 
-Copying whole remote source's content has one disadvantage of using remote source specific paths in your
-require/import directives. For example, if an archive contains file in "dist/css" directory, you'll have
+Copying whole remote source's content has the disadvantage of using remote source specific paths in your
+require/import directives. For example, if an archive contains files in the "dist/css" directory, you'll have
 to mention it:
 
 ```css
@@ -220,7 +218,7 @@ to mention it:
 @import 'lightslider/dist/css/lightslider';
 ```
 
-To mitigate this you can cherry-pick files from the source via "import" option, for example:
+To mitigate this you can cherry-pick files from the source via the "import" option, for example:
 
 ```
 gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", import: %w[
