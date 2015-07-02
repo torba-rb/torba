@@ -86,8 +86,8 @@ module Torba
     ui.suggest "Make sure that the path has trailing '/' if its a directory."
     exit(false)
   rescue Errors::AssetNotFound => e
-    ui.error "Couldn't found an asset with path '#{e.message}'."
-    ui.suggest "Make sure that you've imported all image assets mentioned in a stylesheet(-s)."
+    ui.error "Couldn't find an asset with path '#{e.message}'."
+    ui.suggest "Make sure that you've imported all image/font assets mentioned in a stylesheet(-s)."
     exit(false)
   end
 end
