@@ -71,5 +71,53 @@ module Torba
       end
       assert_equal "background-image: url('<%= asset_path('ui/images/icons.png') %>');", new_content
     end
+
+    def test_url_with_iefix_query
+      current_file = "/home/dist/ui/stylesheet.css"
+      css = <<-CSS
+      @font-face {
+        font-family: "Material-Design-Icons";
+        src: url("../font/material-design-icons/Material-Design-Icons.eot?#iefix") format("embedded-opentype");
+        font-weight: normal;
+        font-style: normal; }
+      CSS
+
+      new_content = filter.call(css, current_file) do |image_full_url|
+        assert_equal "/home/dist/font/material-design-icons/Material-Design-Icons.eot", image_full_url
+        "material-design-icons/Material-Design-Icons.eot"
+      end
+
+      assert_equal <<-CSS, new_content
+      @font-face {
+        font-family: "Material-Design-Icons";
+        src: url("<%= asset_path('material-design-icons/Material-Design-Icons.eot') %>?#iefix") format("embedded-opentype");
+        font-weight: normal;
+        font-style: normal; }
+      CSS
+    end
+
+    def test_url_with_svg_fragment
+      current_file = "/home/dist/ui/stylesheet.css"
+      css = <<-CSS
+      @font-face {
+        font-family: "Material-Design-Icons";
+        src: url("../font/material-design-icons/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
+        font-weight: normal;
+        font-style: normal; }
+      CSS
+
+      new_content = filter.call(css, current_file) do |image_full_url|
+        assert_equal "/home/dist/font/material-design-icons/Material-Design-Icons.svg", image_full_url
+        "material-design-icons/Material-Design-Icons.svg"
+      end
+
+      assert_equal <<-CSS, new_content
+      @font-face {
+        font-family: "Material-Design-Icons";
+        src: url("<%= asset_path('material-design-icons/Material-Design-Icons.svg') %>#Material-Design-Icons") format("svg");
+        font-weight: normal;
+        font-style: normal; }
+      CSS
+    end
   end
 end

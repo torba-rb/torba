@@ -4,15 +4,22 @@ module Torba
   class CssUrlToErbAssetPath
     URL_RE =
       /
-        url\(     # url(
-        \s*       # optional space
-        (?!data)  # no data URIs
-        ['"]?     # optional quote
-        (?!\/)    # only relative location
-        ([^'"]+?) # location
-        ['"]?     # optional quote
-        \s*       # optional space
-        \)        # )
+        (                # $1
+          url\(          # url(
+          \s*            # optional space
+          (?!data)       # no data URIs
+          ['"]?          # optional quote
+          (?!\/)         # only relative location
+        )
+        (                # $2
+          [^'"?#]+?      # location
+        )
+        (                # $3
+          ([?#][^'"]+?)? # optional query or fragment
+          ['"]?          # optional quote
+          \s*            # optional space
+          \)             # )
+        )
       /xm
 
     # @return [String] CSS file content where image "url(...)" paths are replaced by ERB
@@ -42,9 +49,9 @@ module Torba
     #     }"
     def self.call(content, file_path)
       content.gsub(URL_RE) do
-        absolute_image_file_path = File.expand_path($1, File.dirname(file_path))
+        absolute_image_file_path = File.expand_path($2, File.dirname(file_path))
         sprockets_file_path = yield absolute_image_file_path
-        "url('<%= asset_path('#{sprockets_file_path}') %>')"
+        "#{$1}<%= asset_path('#{sprockets_file_path}') %>#{$3}"
       end
     end
   end

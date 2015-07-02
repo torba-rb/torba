@@ -55,8 +55,8 @@ module Torba
       assert_exists "trumbowyg/icons-2x.png"
 
       css = read_path "trumbowyg/trumbowyg.css.erb"
-      assert_includes css, "background: transparent url('<%= asset_path('trumbowyg/icons.png') %>') no-repeat;"
-      assert_includes css, "background-image: url('<%= asset_path('trumbowyg/icons-2x.png') %>')"
+      assert_includes css, %[background: transparent url("<%= asset_path('trumbowyg/icons.png') %>") no-repeat;]
+      assert_includes css, %[background-image: url("<%= asset_path('trumbowyg/icons-2x.png') %>")]
     end
 
     def test_targz
@@ -72,8 +72,8 @@ module Torba
       assert_exists "trumbowyg-from-tar/images/icons-2x.png"
 
       css = read_path "trumbowyg-from-tar/trumbowyg.css.erb"
-      assert_includes css, "background: transparent url('<%= asset_path('trumbowyg-from-tar/images/icons.png') %>') no-repeat;"
-      assert_includes css, "background-image: url('<%= asset_path('trumbowyg-from-tar/images/icons-2x.png') %>')"
+      assert_includes css, %[background: transparent url("<%= asset_path('trumbowyg-from-tar/images/icons.png') %>") no-repeat;]
+      assert_includes css, %[background-image: url("<%= asset_path('trumbowyg-from-tar/images/icons-2x.png') %>")]
     end
 
     def test_npm

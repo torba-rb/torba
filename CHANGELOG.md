@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Bug fixes
+
+* Fix no asset found when a CSS url contains "?#iefix" or "#svg-fragment"
+
 ## Version 0.3.0
 
 ### Enhancements
