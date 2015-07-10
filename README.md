@@ -68,7 +68,7 @@ in boot.rb
 +require 'torba/verify'
 ```
 
-it config/application.rb
+in config/application.rb
 
 ```diff
  # Require the gems listed in Gemfile, including any gems
