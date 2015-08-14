@@ -105,13 +105,13 @@ Allows to download and unpack asset package from any source accessible by curl.
 
 The syntax is:
 
-```
+```ruby
 zip "name", url: "..." [, import: %w(...)]
 ```
 
 where "name" is an arbitrary name for the package, more on "import" below. For example,
 
-```
+```ruby
 zip "scroll_magic", url: "https://github.com/janpaepke/ScrollMagic/archive/v2.0.0.zip"
 ```
 
@@ -119,13 +119,13 @@ zip "scroll_magic", url: "https://github.com/janpaepke/ScrollMagic/archive/v2.0.
 
 The syntax is same as for a zip package:
 
-```
+```ruby
 targz "name", url: "..." [, import: %w(...)]
 ```
 
 for example,
 
-```
+```ruby
 targz "scroll_magic", url: "https://github.com/janpaepke/ScrollMagic/archive/v2.0.0.tar.gz"
 ```
 
@@ -135,20 +135,20 @@ This is a more readable version/shortcut for "https://github.com/.../archive/...
 
 The syntax is:
 
-```
+```ruby
 gh_release "name", source: "...", tag: "..." [, import: %w(...)]
 ```
 
 where "source" is the user + repository and "tag" is the repository tag (exactly as on Github,
 i.e. with "v" prefix if present), more on "import" below. For example,
 
-```
+```ruby
 gh_release "scroll_magic", source: "janpaepke/ScrollMagic", tag: "v.2.0.0"
 ```
 
 You can omit the name, it will be equal to the repository name:
 
-```
+```ruby
 gh_release source: "janpaepke/ScrollMagic", tag: "v.2.0.0" # "ScrollMagic" is assumed
 ```
 
@@ -158,20 +158,20 @@ Allows to download packages from npm registry.
 
 The syntax is:
 
-```
+```ruby
 npm "name", package: "...", version: "..." [, import: %w(...)]
 ```
 
 where "package" is the package name as published on npm registry and "version" is its version,
 more on "import" below. For example,
 
-```
+```ruby
 npm "coffee", package: "coffee-script", version: "1.9.2"
 ```
 
 You can omit the name, it will be equal to the package name:
 
-```
+```ruby
 npm package: "coffee-script", version: "1.9.2"
 ```
 
@@ -220,7 +220,7 @@ to mention it:
 
 To mitigate this you can cherry-pick files from the source via the "import" option, for example:
 
-```
+```ruby
 gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", import: %w[
   dist/css/lightslider.css
 ]
@@ -235,7 +235,7 @@ can omit unnecessary paths:
 
 You can use any Dir.glob pattern:
 
-```
+```ruby
 gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", import: %w[
   dist/css/lightslider.css
   dist/img/*.png
