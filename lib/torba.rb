@@ -73,8 +73,12 @@ module Torba
   # @yield a block, converts common exceptions into useful messages
   def self.pretty_errors
     yield
-  rescue Errors::UnbuiltPackage
+  rescue Errors::MissingPackages => e
     ui.error "Your Torba is not packed yet."
+    ui.error "Missing packages:"
+    e.packages.each do |package|
+      ui.error "  * #{package.name}"
+    end
     ui.suggest "Run `bundle exec torba pack` to install missing packages."
     exit(false)
   rescue Errors::ShellCommandFailed => e

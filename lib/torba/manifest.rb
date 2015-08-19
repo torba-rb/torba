@@ -5,6 +5,16 @@ require "torba/remote_sources/targz"
 require "torba/remote_sources/npm"
 
 module Torba
+  module Errors
+    class MissingPackages < StandardError
+      attr_reader :packages
+
+      def initialize(packages)
+        @packages = packages
+        super
+      end
+    end
+  end
   # Represents Torbafile.
   class Manifest
     # all packages defined in Torbafile
@@ -103,7 +113,11 @@ module Torba
     # Verifies all {#packages}
     # @return [void]
     def verify
-      packages.each(&:verify)
+      missing = packages.reject(&:verify)
+
+      if missing.any?
+        raise Errors::MissingPackages.new(missing)
+      end
     end
   end
 end
