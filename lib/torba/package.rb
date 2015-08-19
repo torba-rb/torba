@@ -5,8 +5,6 @@ require "torba/import_list"
 
 module Torba
   module Errors
-    UnbuiltPackage = Class.new(StandardError)
-
     class NothingToImport < StandardError
       attr_reader :package, :path
 
@@ -58,9 +56,9 @@ module Torba
       end
     end
 
-    # @raise [Errors::UnbuiltPackage] if package is not build.
+    # @return [false] if package is not build.
     def verify
-      raise Errors::UnbuiltPackage.new(name) unless built?
+      built?
     end
 
     # Cache remote source and import specified assets to {#load_path}.

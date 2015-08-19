@@ -1,5 +1,10 @@
 ## Unreleased
 
+### Enhancements
+
+* The exception that gets raised during `torba verify` now list the missing
+  packages
+
 ## Version 0.3.1
 
 ### Bug fixes

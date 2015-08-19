@@ -102,5 +102,14 @@ module Torba
         end
       end
     end
+
+    def test_verify
+      manifest.zip "angular", url: "http://angularjs.com/angularjs.zip"
+      manifest.npm package: "coffee-script", version: "1.8.3"
+
+      error = assert_raises(Torba::Errors::MissingPackages) { manifest.verify }
+
+      assert_equal error.packages.map(&:name), %w(angular coffee-script)
+    end
   end
 end
