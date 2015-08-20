@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 0.4.0
+
 ### Enhancements
 
 * The exception that gets raised during `torba verify` now list the missing
