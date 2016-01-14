@@ -48,6 +48,8 @@ module Torba
       end
 
       def ensure_cached; end
+
+      def digest; '' end
     end
   end
 end
