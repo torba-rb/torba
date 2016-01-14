@@ -163,7 +163,12 @@ module Torba
           image_asset.logical_path
         end
 
-        new_absolute_path = File.join(load_path, asset.logical_path + ".erb")
+        if content == new_content
+          new_absolute_path = File.join(load_path, asset.logical_path)
+        else
+          new_absolute_path = File.join(load_path, asset.logical_path + ".erb")
+        end
+
         ensure_directory(new_absolute_path)
         File.write(new_absolute_path, new_content)
       end
