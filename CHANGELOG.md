@@ -1,5 +1,11 @@
 ## Unreleased
 
+## Version 0.4.1
+
+### Bug fixes
+
+* Do not add the `.erb` extension for stylesheets that don't need it.
+
 ## Version 0.4.0
 
 ### Enhancements
