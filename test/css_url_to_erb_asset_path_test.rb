@@ -14,6 +14,8 @@ module Torba
     def test_url_with_data
       css = "background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaskip);"
       assert_equal css, filter.call(css, "/current/file")
+      css = "background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaskip');"
+      assert_equal css, filter.call(css, "/current/file")
     end
 
     def test_http_url
