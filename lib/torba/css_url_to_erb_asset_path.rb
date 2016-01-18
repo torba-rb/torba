@@ -7,8 +7,8 @@ module Torba
         (                # $1
           url\(          # url(
           \s*            # optional space
-          (?!data)       # no data URIs
           ['"]?          # optional quote
+          (?!data)       # no data URIs
           (?!http[s]?:\/\/)  # no remote URIs
           (?!\/)         # only relative location
         )
