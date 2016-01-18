@@ -9,6 +9,7 @@ module Torba
           \s*            # optional space
           (?!data)       # no data URIs
           ['"]?          # optional quote
+          (?!http[s]?:\/\/)  # no remote URIs
           (?!\/)         # only relative location
         )
         (                # $2

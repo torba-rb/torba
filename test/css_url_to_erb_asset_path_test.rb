@@ -16,6 +16,15 @@ module Torba
       assert_equal css, filter.call(css, "/current/file")
     end
 
+    def test_http_url
+      url = 'http://example.com/example.png'
+      url_https = url.gsub('http', 'https')
+      css = "background-image: url('#{url}');"
+      css_https = "background-image: url('#{url_https}');"
+      assert_equal css, filter.call(css, url)
+      assert_equal css_https, filter.call(css_https, url_https)
+    end
+
     def test_absolute_url
       css = "background-image: url('/icons.png');"
       assert_equal "background-image: url('/icons.png');", filter.call(css, "/current_file")
