@@ -1,5 +1,12 @@
 ## Unreleased
 
+## Version 0.4.2
+
+### Bug fixes
+
+* Remote url() assets should not be given to asset_path
+* Support both url(data: and url('data: in css
+
 ## Version 0.4.1
 
 ### Bug fixes
