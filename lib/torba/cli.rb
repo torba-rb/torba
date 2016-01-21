@@ -14,5 +14,11 @@ module Torba
       Torba.pretty_errors { Torba.verify }
       Torba.ui.confirm "Torba is prepared!"
     end
+
+    desc "clean", "delete all contents of Torba.home_path"
+    def clean
+      Torba.pretty_errors { Torba.clean }
+      Torba.ui.confirm "Torba has been cleaned!"
+    end
   end
 end

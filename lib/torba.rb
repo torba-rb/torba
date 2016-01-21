@@ -61,6 +61,11 @@ module Torba
     manifest.verify
   end
 
+  # removes @home_path
+  def self.clean
+    FileUtils.rm_rf self.home_path
+  end
+
   # @return [String] unique short fingerprint/hash for given string
   # @param [String] string to be hashed
   #
