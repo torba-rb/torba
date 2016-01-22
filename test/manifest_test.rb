@@ -111,5 +111,12 @@ module Torba
 
       assert_equal error.packages.map(&:name), %w(angular coffee-script)
     end
+
+    def test_clean
+      torba_home_path = '/tmp/torba_home_path'
+      FileUtils.mkdir_p torba_home_path
+      FileUtils.rm_rf torba_home_path
+      refute_exists torba_home_path
+    end
   end
 end
