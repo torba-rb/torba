@@ -8,6 +8,7 @@ module Torba
       Torba.pretty_errors { Torba.pack }
       Torba.ui.confirm "Torba has been packed!"
     end
+    map install: :pack
 
     desc "verify", "check if all packages are prepared"
     def verify
