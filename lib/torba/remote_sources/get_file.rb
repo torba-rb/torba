@@ -14,7 +14,7 @@ module Torba
 
         Torba.ui.info "downloading '#{url}'"
 
-        command = "curl -Lf -o #{tempfile.path} #{url}"
+        command = "curl -s -Lf -o #{tempfile.path} #{url}"
         system(command) || raise(Errors::ShellCommandFailed.new(command))
 
         tempfile
