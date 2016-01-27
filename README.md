@@ -285,13 +285,21 @@ Specify the `TORBA_HOME_PATH` env variable pointing to a persistent directory
 writable by your deploy user and shared across releases. Capistrano's `shared`
 directory is good for this.
 
-For example:
-
-```bash
-export TORBA_HOME_PATH=/var/www/my_app/shared/torba
+For Capistrano 3, you can set this up in `config/deploy.rb`:
 ```
+set :default_env, { torba_home_path: shared_path.join('vendor/torba') }
 
-There is no need to add a symlink.
+namespace :deploy do
+  task :torba do
+    on release_roles(:all) do
+      within release_path do
+        execute :bundle, :exec, :torba, :pack
+      end
+    end
+  end
+  after  "bundler:install", "deploy:torba"
+end
+```
 
 ### Troubleshooting
 
