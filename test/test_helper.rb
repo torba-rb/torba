@@ -3,6 +3,7 @@ require "torba"
 require "torba/remote_sources/common"
 
 require "minitest/autorun"
+require "mocha/mini_test"
 require "tmpdir"
 require "fileutils"
 

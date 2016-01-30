@@ -251,10 +251,53 @@ default), except that Torba does have a way to specify exact list of files to im
 
 ## Deployment
 
-1. Specify `TORBA_HOME_PATH` env variable pointing to a persistent directory writable by your
-   deploy user. For Capistrano it should be `shared/`.
-2. Add `bundle exec torba pack` to your deployment script right after `bundle install`. It's safe
-   and fairly cheap to run it unconditionally on each deployment.
+In Rails apps, Torba automatically hooks into the existing `assets:precompile`
+Rake task to ensure that `torba pack` is executed. This means that Rails
+deployments will "just work", although there are some optimizations you can make
+as explained below.
+
+### Heroku
+
+You will need to specify some config vars to ensure Torba's files are placed in
+locations suitable for the Heroku platform.
+
+`TORBA_HOME_PATH` should be within your app so that Torba's assets are included
+in the slug.
+
+`TORBA_CACHE_PATH` should make use of the `tmp/cache/assets` directory. This is
+where the Ruby buildpack expects cached files to be stored related to the
+`assets:precompile` step. This way Torba doesn't have to download packages fresh
+every time.
+
+```bash
+heroku config:set TORBA_HOME_PATH=vendor/torba TORBA_CACHE_PATH=tmp/cache/assets/torba
+```
+
+Now your Heroku app is good to go.
+
+### Capistrano
+
+Specify the `TORBA_HOME_PATH` env variable pointing to a persistent directory
+writable by your deploy user and shared across releases. Capistrano's `shared`
+directory is good for this.
+
+For example:
+
+```bash
+export TORBA_HOME_PATH=/var/www/my_app/shared/torba
+```
+
+There is no need to add a symlink.
+
+### Troubleshooting
+
+If you are getting an error like `Your Torba is not packed yet` when trying to
+run `rake assets:precompile` (or `bin/rails assets:precompile` in Rails 5),
+set the `TORBA_DONT_VERIFY` environment variable, like this:
+
+```bash
+TORBA_DONT_VERIFY=1 bin/rake assets:precompile
+```
 
 [bower]: http://bower.io/
 [sprockets]: https://github.com/rails/sprockets/
