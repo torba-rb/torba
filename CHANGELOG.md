@@ -1,5 +1,24 @@
 ## Unreleased
 
+## Version 0.5.0
+
+### Upgrading notes
+
+Rails users are advised to remove manual execution of `torba pack` from
+their deployment scripts, since the command now is a part of
+`rake assets:precompile`.
+
+### Enhancements
+
+* Support deployment to Heroku
+* `torba pack` is automatically injected into `rake assets:precompile`
+  in Rails applications
+* `torba install` command is a mapping for `torba pack`
+
+### Bug fixes
+
+* Retry 5 times if fetching a remote file fails
+
 ## Version 0.4.2
 
 ### Bug fixes

@@ -17,7 +17,7 @@ Production ready.
 
 ## Documentation
 
-[Released version](http://rubydoc.info/gems/torba/0.4.2)
+[Released version](http://rubydoc.info/gems/torba/0.5.0)
 
 ## Why
 
