@@ -289,6 +289,16 @@ export TORBA_HOME_PATH=/var/www/my_app/shared/torba
 
 There is no need to add a symlink.
 
+### Troubleshooting
+
+If you are getting an error like `Your Torba is not packed yet` when trying to
+run `rake assets:precompile` (or `bin/rails assets:precompile` in Rails 5),
+set the `TORBA_DONT_VERIFY` environment variable, like this:
+
+```bash
+TORBA_DONT_VERIFY=1 bin/rake assets:precompile
+```
+
 [bower]: http://bower.io/
 [sprockets]: https://github.com/rails/sprockets/
 [sprockets-load-path]: https://github.com/rails/sprockets#the-load-path

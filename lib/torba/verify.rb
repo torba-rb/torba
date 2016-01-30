@@ -5,7 +5,7 @@ require "torba"
 # this case it is OK that the Torbafile hasn't been packed yet, because we are
 # about to do so.
 #
-unless defined?(Rake::Task)
+unless ENV["TORBA_DONT_VERIFY"] || defined?(Rake::Task)
   if STDOUT.tty?
     Torba.pretty_errors { Torba.verify }
   else
