@@ -91,6 +91,10 @@ and/or "@import" [Sass directives][sass-import] to "application.css".
 
 If any changes made to the Torbafile, run `bundle exec torba pack` again.
 
+### Examples
+
+See fully configured [Rails application][rails-example].
+
 ### Torbafile
 
 Torbafile is an assets specification. It is a plain text file that contains one or more
@@ -311,3 +315,4 @@ TORBA_DONT_VERIFY=1 bin/rake assets:precompile
 [semver]: http://semver.org/
 [rails-ticket-vendoring]: https://github.com/rails/rails/pull/7968
 [npm]: https://npmjs.com
+[rails-example]: https://github.com/torba-rb/rails-example
