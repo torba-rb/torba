@@ -15,6 +15,7 @@ module Torba
       end
     end
   end
+
   # Represents Torbafile.
   class Manifest
     # all packages defined in Torbafile
@@ -118,6 +119,15 @@ module Torba
 
       if missing.any?
         raise Errors::MissingPackages.new(missing)
+      end
+    end
+
+    # @return [Array<Package>] where each package name at least partially matches given name.
+    # @since unreleased
+    def find_packages_by_name(name)
+      re = Regexp.new(name, Regexp::IGNORECASE)
+      packages.find_all do |package|
+        package.name =~ re
       end
     end
   end

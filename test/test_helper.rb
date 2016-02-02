@@ -97,7 +97,7 @@ module Torba
         end
 
         cmd = "ruby bin/torba #{torba_cmd}"
-        Open3.capture3(env, cmd)
+        Open3.capture3(env, cmd, stdin_data: options[:stdin_data])
       end
     end
 

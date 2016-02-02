@@ -78,6 +78,12 @@ module Torba
     Digest::SHA1.hexdigest(string)[0..7]
   end
 
+  # @see Manifest#find_packages_by_name
+  # @since unreleased
+  def self.find_packages_by_name(name)
+    manifest.find_packages_by_name(name)
+  end
+
   # @yield a block, converts common exceptions into useful messages
   def self.pretty_errors
     yield

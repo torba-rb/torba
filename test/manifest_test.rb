@@ -111,5 +111,32 @@ module Torba
 
       assert_equal error.packages.map(&:name), %w(angular coffee-script)
     end
+
+    def test_find_packages_by_name_empty
+      assert_equal [], manifest.find_packages_by_name("coffee-script")
+    end
+
+    def test_find_packages_by_name_no_match
+      manifest.npm "coffee", package: "coffee-script", version: "1.8.3"
+      manifest.npm "angular", package: "angular", version: "1.3.5"
+      assert_equal [], manifest.find_packages_by_name("coffee-script")
+    end
+
+    def test_find_packages_by_name_single_match
+      manifest.npm "coffee", package: "coffee-script", version: "1.8.3"
+      manifest.npm "angular", package: "angular", version: "1.3.5"
+      assert_equal [manifest.packages[0]], manifest.find_packages_by_name("coffee")
+    end
+
+    def test_find_packages_by_name_multiple_match
+      manifest.npm "angular", package: "angular", version: "1.3.5"
+      manifest.npm "angular-routes", package: "angular-routes", version: "1.3.5"
+      assert_equal manifest.packages, manifest.find_packages_by_name("angular")
+    end
+
+    def test_find_packages_by_name_ignorecase
+      manifest.npm "Angular", package: "angular", version: "1.3.5"
+      assert_equal manifest.packages, manifest.find_packages_by_name("angular")
+    end
   end
 end
