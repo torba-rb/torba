@@ -28,7 +28,7 @@ module Torba
     #
     # @overload self.build
     #   Reads Torbafile from current directory
-    def self.build(file_path = nil)
+    def self.build(file_path = ENV["TORBA_FILE"])
       file_path ||= File.join(Dir.pwd, "Torbafile")
 
       manifest = new
