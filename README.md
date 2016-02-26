@@ -288,17 +288,6 @@ directory is good for this.
 For Capistrano 3, you can set this up in `config/deploy.rb`:
 ```
 set :default_env, { torba_home_path: shared_path.join('vendor/torba') }
-
-namespace :deploy do
-  task :torba do
-    on release_roles(:all) do
-      within release_path do
-        execute :bundle, :exec, :torba, :pack
-      end
-    end
-  end
-  after  "bundler:install", "deploy:torba"
-end
 ```
 
 ### Troubleshooting
