@@ -1,5 +1,11 @@
 ## Unreleased
 
+## Version 0.5.1
+
+### Bug fixes
+
+* Treat SASS/SCSS files as regular stylesheets
+
 ## Version 0.5.0
 
 ### Upgrading notes
