@@ -7,7 +7,7 @@ module Torba
   class ImportList
     class Asset < Struct.new(:absolute_path, :logical_path)
       def css?
-        absolute_path.end_with?(".css")
+        absolute_path =~ /\.(sass|scss|css)$/
       end
 
       def js?

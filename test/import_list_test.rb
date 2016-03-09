@@ -26,19 +26,27 @@ module Torba
       ImportList::Asset.new("/dir/stylesheet.css", "stylesheet.css")
     end
 
+    def scss_asset
+      ImportList::Asset.new("/dir/stylesheet.scss", "stylesheet.scss")
+    end
+
+    def sass_asset
+      ImportList::Asset.new("/dir/stylesheet.sass", "stylesheet.sass")
+    end
+
     def test_css_assets
-      list = ImportList.new([js_asset, css_asset])
-      assert [css_asset], list.css_assets
+      list = ImportList.new([js_asset, css_asset, scss_asset, sass_asset])
+      assert [css_asset, scss_asset, sass_asset], list.css_assets
     end
 
     def test_non_css_assets
-      list = ImportList.new([js_asset, css_asset])
+      list = ImportList.new([js_asset, css_asset, scss_asset, sass_asset])
       assert [js_asset], list.non_css_assets
     end
 
     def test_non_js_css_assets
       img_asset = ImportList::Asset.new("/dir/image.png", "image.png")
-      list = ImportList.new([js_asset, css_asset, img_asset])
+      list = ImportList.new([js_asset, css_asset, scss_asset, sass_asset, img_asset])
       assert [img_asset], list.non_js_css_assets
     end
   end
