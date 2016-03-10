@@ -32,6 +32,22 @@ module Torba
       compare_dirs "test/fixtures/home_path/02", path_to_packaged("lo_dash")
     end
 
+    def test_pack_without_image_asset_specified_in_import
+      out, err, status = torba("pack", torbafile: "03_image_asset_not_specified.rb")
+      refute status.success?, err
+      assert_includes out, <<OUT
+Unknown asset to process with path '#{path_to_packaged "Trumbowyg", Test::TempHome.persistent_tmp_dir}/dist/ui/images/icons-2x.png'.
+Make sure that you've imported all image/font assets mentioned in a stylesheet(-s).
+OUT
+    end
+
+    def test_pack_with_not_existed_assets_mentioned_in_stylesheets
+      out, err, status = torba("pack", torbafile: "04_not_existed_assets.rb")
+      assert status.success?, err
+      assert_includes out, "Torba has been packed!"
+      compare_dirs "test/fixtures/home_path/04", path_to_packaged("bourbon")
+    end
+
     def test_verify_unpacked
       out, err, status = torba("verify", torbafile: "01_zip.rb")
       refute status.success?, err

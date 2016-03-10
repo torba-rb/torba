@@ -155,18 +155,22 @@ module Torba
     end
 
     def process_stylesheets
-      import_list.css_assets.each do |asset|
-        content = File.read(asset.absolute_path)
+      import_list.css_assets.each do |css_asset|
+        content = File.read(css_asset.absolute_path)
 
-        new_content = CssUrlToErbAssetPath.call(content, asset.absolute_path) do |image_file_path|
-          image_asset = import_list.find_by_absolute_path(image_file_path)
-          image_asset.logical_path
+        new_content = CssUrlToErbAssetPath.call(content, css_asset.absolute_path) do |asset_file_path|
+          if File.exist?(asset_file_path)
+            asset = import_list.find_by_absolute_path(asset_file_path)
+            asset.logical_path
+          else
+            nil
+          end
         end
 
         if content == new_content
-          new_absolute_path = File.join(load_path, asset.logical_path)
+          new_absolute_path = File.join(load_path, css_asset.logical_path)
         else
-          new_absolute_path = File.join(load_path, asset.logical_path + ".erb")
+          new_absolute_path = File.join(load_path, css_asset.logical_path + ".erb")
         end
 
         ensure_directory(new_absolute_path)

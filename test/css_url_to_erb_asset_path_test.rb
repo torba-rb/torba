@@ -32,6 +32,11 @@ module Torba
       assert_equal "background-image: url('/icons.png');", filter.call(css, "/current_file")
     end
 
+    def test_block_returns_nil
+      css = "background-image: url('icons.png');"
+      assert_equal css, filter.call(css, "/current_file") { nil }
+    end
+
     def test_stylesheet_and_image_in_same_directory
       current_file = "/home/package/dist/ui/stylesheet.css"
       css = "background-image: url('icons.png');"
