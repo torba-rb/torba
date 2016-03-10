@@ -52,7 +52,11 @@ module Torba
       content.gsub(URL_RE) do
         absolute_image_file_path = File.expand_path($2, File.dirname(file_path))
         sprockets_file_path = yield absolute_image_file_path
-        "#{$1}<%= asset_path('#{sprockets_file_path}') %>#{$3}"
+        if sprockets_file_path
+          "#{$1}<%= asset_path('#{sprockets_file_path}') %>#{$3}"
+        else
+          $&
+        end
       end
     end
   end

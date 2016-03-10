@@ -38,5 +38,15 @@ module Torba
 
       assert_exists File.join(package.load_path, "package", "hello.css")
     end
+
+    def test_package_css_with_urls_pointing_to_nonexisting_assets
+      fixture "hello.css", "/*body {\nbackground-image: url(image.png)\n}*/"
+      source = Torba::Test::RemoteSource.new(source_dir)
+      package = Package.new("package", source, import: ["hello.css"])
+
+      package.build
+
+      assert_exists File.join(package.load_path, "package", "hello.css")
+    end
   end
 end
