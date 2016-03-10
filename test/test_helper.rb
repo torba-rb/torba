@@ -13,6 +13,10 @@ module Torba
     module TempHome
       attr_reader :torba_tmp_dir
 
+      def self.persistent_tmp_dir
+        @persistent_tmp_dir ||= File.realpath(Dir.mktmpdir("torba"))
+      end
+
       def before_setup
         Torba.home_path = @torba_tmp_dir = File.realpath(Dir.mktmpdir("torba"))
         super
@@ -22,6 +26,10 @@ module Torba
         FileUtils.rm_rf(torba_tmp_dir)
         Torba.home_path = nil
         super
+      end
+
+      Minitest.after_run do
+        FileUtils.rm_rf(persistent_tmp_dir)
       end
     end
 
@@ -74,7 +82,7 @@ module Torba
 
     module Exec
       def torba(torba_cmd, options = {})
-        env = {"TORBA_HOME_PATH" => torba_tmp_dir}
+        env = {"TORBA_HOME_PATH" => torba_tmp_dir, "TORBA_CACHE_PATH" => TempHome.persistent_tmp_dir}
 
         if (torbafile = options[:torbafile])
           env.merge!("TORBA_FILE" => "test/fixtures/torbafiles/#{torbafile}")
@@ -82,6 +90,10 @@ module Torba
 
         if (home_path = options[:home_path])
           env.merge!("TORBA_HOME_PATH" => home_path)
+        end
+
+        if (cache_path = options[:cache_path])
+          env.merge!("TORBA_CACHE_PATH" => cache_path)
         end
 
         cmd = "ruby bin/torba #{torba_cmd}"
