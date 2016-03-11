@@ -30,6 +30,14 @@ module Torba
     @cache_path ||= ENV["TORBA_CACHE_PATH"] || File.join(home_path, "cache")
   end
 
+  # Override cache path with a new value
+  # @param val [String] new cache path
+  # @return [void]
+  # @since unreleased
+  def self.cache_path=(val)
+    @cache_path = val
+  end
+
   # @return [Ui]
   def self.ui
     @ui ||= Ui.new
