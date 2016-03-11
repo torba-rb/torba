@@ -33,7 +33,7 @@ module Torba
   # Override cache path with a new value
   # @param val [String] new cache path
   # @return [void]
-  # @since unreleased
+  # @since 0.6.0
   def self.cache_path=(val)
     @cache_path = val
   end

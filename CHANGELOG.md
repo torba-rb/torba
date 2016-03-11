@@ -1,5 +1,15 @@
 ## Unreleased
 
+## Version 0.6.0
+
+### Enhancements
+
+* Torba.cache_path= setter
+
+### Bug fixes
+
+* Handle stylesheets that mention nonexisting assets (e.g. with SCSS variables)
+
 ## Version 0.5.1
 
 ### Bug fixes
