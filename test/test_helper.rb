@@ -103,6 +103,12 @@ module Torba
         cmd = "ruby bin/torba #{torba_cmd}"
         Open3.capture3(env, cmd, options)
       end
+
+      def skip_java_capture3_bug
+        if RUBY_PLATFORM == "java"
+          skip "Skipping test due to Open3.capture3 bug in Jruby"
+        end
+      end
     end
 
     class RemoteSource

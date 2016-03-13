@@ -37,6 +37,7 @@ OUT
     end
 
     def test_similar_names_chosen_option
+      skip_java_capture3_bug
       out, err, status = torba("show bourbon", torbafile: "04_similar_names.rb", stdin_data: "2")
       assert status.success?, err
       refute_includes out, path_to_packaged("bourbon")

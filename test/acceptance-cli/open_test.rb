@@ -71,6 +71,7 @@ OUT
     end
 
     def test_similar_names_chosen_option
+      skip_java_capture3_bug
       out, err, status = torba("open bourbon", torbafile: "04_similar_names.rb", stdin_data: "2", env: {
         "TORBA_EDITOR" => nil, "VISUAL" => nil, "EDITOR" => "echo editor"
       })
