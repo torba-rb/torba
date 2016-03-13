@@ -1,4 +1,5 @@
 require "thor"
+require "shellwords"
 require "torba"
 
 module Torba
@@ -21,6 +22,22 @@ module Torba
       Torba.pretty_errors do
         Torba.pack
         Torba.ui.info(find_package(name).load_path)
+      end
+    end
+
+    desc "open PACKAGE", "open a particular package in editor"
+    def open(name)
+      editor = [ENV["TORBA_EDITOR"], ENV["VISUAL"], ENV["EDITOR"]].find { |e| !e.nil? && !e.empty? }
+      unless editor
+        Torba.ui.error("To open a package, set $EDITOR or $TORBA_EDITOR")
+        exit(false)
+      end
+
+      Torba.pretty_errors do
+        Torba.pack
+
+        command = Shellwords.split(editor) << find_package(name).load_path
+        system(*command) || Torba.ui.error("Could not run '#{command.join(" ")}'")
       end
     end
 

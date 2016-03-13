@@ -84,20 +84,24 @@ module Torba
       def torba(torba_cmd, options = {})
         env = {"TORBA_HOME_PATH" => torba_tmp_dir, "TORBA_CACHE_PATH" => TempHome.persistent_tmp_dir}
 
-        if (torbafile = options[:torbafile])
+        if (torbafile = options.delete(:torbafile))
           env.merge!("TORBA_FILE" => "test/fixtures/torbafiles/#{torbafile}")
         end
 
-        if (home_path = options[:home_path])
+        if (home_path = options.delete(:home_path))
           env.merge!("TORBA_HOME_PATH" => home_path)
         end
 
-        if (cache_path = options[:cache_path])
+        if (cache_path = options.delete(:cache_path))
           env.merge!("TORBA_CACHE_PATH" => cache_path)
         end
 
+        if (additional_env = options.delete(:env))
+          env.merge!(additional_env)
+        end
+
         cmd = "ruby bin/torba #{torba_cmd}"
-        Open3.capture3(env, cmd, stdin_data: options[:stdin_data])
+        Open3.capture3(env, cmd, options)
       end
     end
 
