@@ -120,4 +120,5 @@ end
 class Minitest::Test
   include Torba::Test::TempHome
   include Torba::Test::FileSystem
+  include Torba::Test::Exec
 end
