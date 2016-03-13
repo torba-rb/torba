@@ -25,7 +25,7 @@ module Torba
 
     # @return [Integer] index of chosen option.
     # @return [nil] if exit was chosen.
-    # @since unreleased
+    # @since 0.7.0
     def choose_one(options)
       options.each_with_index do |option, index|
         info("#{index + 1} : #{option}")

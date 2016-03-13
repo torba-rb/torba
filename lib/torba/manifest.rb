@@ -123,7 +123,7 @@ module Torba
     end
 
     # @return [Array<Package>] where each package name at least partially matches given name.
-    # @since unreleased
+    # @since 0.7.0
     def find_packages_by_name(name)
       re = Regexp.new(name, Regexp::IGNORECASE)
       packages.find_all do |package|

@@ -79,7 +79,7 @@ module Torba
   end
 
   # @see Manifest#find_packages_by_name
-  # @since unreleased
+  # @since 0.7.0
   def self.find_packages_by_name(name)
     manifest.find_packages_by_name(name)
   end

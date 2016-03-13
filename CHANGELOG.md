@@ -1,5 +1,12 @@
 ## Unreleased
 
+## Version 0.7.0
+
+### Enhancements
+
+* `torba show` command
+* `torba open` command
+
 ## Version 0.6.0
 
 ### Enhancements
