@@ -138,5 +138,14 @@ module Torba
       manifest.npm "Angular", package: "angular", version: "1.3.5"
       assert_equal manifest.packages, manifest.find_packages_by_name("angular")
     end
+
+    def test_git
+      manifest.git "left-pad", url: "https://github.com/azer/left-pad.git"
+
+      assert_equal 1, manifest.packages.size
+      assert_equal "left-pad", package.name
+      assert_instance_of RemoteSources::Git, remote
+      assert_equal "https://github.com/azer/left-pad.git", remote.url
+    end
   end
 end

@@ -3,6 +3,7 @@ require "torba/remote_sources/zip"
 require "torba/remote_sources/github_release"
 require "torba/remote_sources/targz"
 require "torba/remote_sources/npm"
+require "torba/remote_sources/git"
 
 module Torba
   module Errors
@@ -83,6 +84,14 @@ module Torba
       remote_source = RemoteSources::Npm.new(package_name, version)
 
       name ||= remote_source.package
+      packages << Package.new(name, remote_source, options)
+    end
+
+    # Adds {Package} with {RemoteSources::Targz} to {#packages}
+    # @since 0.XX.0
+    def git(name, options = {})
+      url = options.fetch(:url)
+      remote_source = RemoteSources::Git.new(url)
       packages << Package.new(name, remote_source, options)
     end
 

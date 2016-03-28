@@ -44,6 +44,7 @@ Problems with the Bower:
 * unzip
 * gzip
 * tar
+* git
 
 ## Design limitations
 
@@ -100,8 +101,8 @@ See fully configured [Rails application][rails-example].
 Torbafile is an assets specification. It is a plain text file that contains one or more
 sections, each of them describes one remote source of assets.
 
-Currently only zip, tar.gz archives, [Github releases][github-releases] and
-[npm packages][npm] are supported.
+Currently only zip, tar.gz archives, [Github releases][github-releases],
+[npm packages][npm] and git repositories are supported.
 
 #### Zip archive package
 
@@ -177,6 +178,22 @@ You can omit the name, it will be equal to the package name:
 
 ```ruby
 npm package: "coffee-script", version: "1.9.2"
+```
+
+#### Git repository package
+
+Allows to download and unpack asset package from any git repository cloneable.
+
+The syntax is:
+
+```ruby
+git "name", url: "..." [, import: %w(...)]
+```
+
+where "name" is an arbitrary name for the package, more on "import" below. For example,
+
+```ruby
+git "angular", url: "https://github.com/angular/angular.git"
 ```
 
 ### "Packing the torba" process
