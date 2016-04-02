@@ -6,28 +6,28 @@ module Torba
       out, err, status = torba("pack", torbafile: "01_zip.rb")
       assert status.success?, err
       assert_includes out, "Torba has been packed!"
-      compare_dirs "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
     end
 
     def test_targz
       out, err, status = torba("pack", torbafile: "01_targz.rb")
       assert status.success?, err
       assert_includes out, "Torba has been packed!"
-      compare_dirs "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
     end
 
     def test_gh_release
       out, err, status = torba("pack", torbafile: "01_gh_release.rb")
       assert status.success?, err
       assert_includes out, "Torba has been packed!"
-      compare_dirs "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
     end
 
     def test_npm
       out, err, status = torba("pack", torbafile: "02_npm.rb")
       assert status.success?, err
       assert_includes out, "Torba has been packed!"
-      compare_dirs "test/fixtures/home_path/02", path_to_packaged("lo_dash")
+      assert_dirs_equal "test/fixtures/home_path/02", path_to_packaged("lo_dash")
     end
 
     def test_without_image_asset_specified_in_import
@@ -43,7 +43,7 @@ OUT
       out, err, status = torba("pack", torbafile: "03_not_existed_assets.rb")
       assert status.success?, err
       assert_includes out, "Torba has been packed!"
-      compare_dirs "test/fixtures/home_path/03", path_to_packaged("bourbon")
+      assert_dirs_equal "test/fixtures/home_path/03", path_to_packaged("bourbon")
     end
   end
 end

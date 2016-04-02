@@ -5,7 +5,7 @@ module Torba
     def test_runs_pack
       out, err, status = torba("show trumbowyg", torbafile: "01_zip.rb")
       assert status.success?, err
-      compare_dirs "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
     end
 
     def test_outputs_package_directory

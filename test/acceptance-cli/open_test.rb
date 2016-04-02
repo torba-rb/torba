@@ -15,7 +15,7 @@ module Torba
         "TORBA_EDITOR" => "echo torba_editor", "VISUAL" => "echo visual", "EDITOR" => "echo editor"
       })
       assert status.success?, err
-      compare_dirs "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
     end
 
     def test_uses_torba_editor_first
