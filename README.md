@@ -53,29 +53,20 @@ Problems with the Bower:
 
 ## Installation
 
-Add this line to your application's Gemfile and run `bundle`:
+### Rails
+
+Use [torba-rails][torba-rails-github].
+
+### Sinatra
+
+See this [example project][sinatra-example].
+
+### Other Ruby application
+
+Add this line to your application's Gemfile and run bundle:
 
 ```ruby
 gem 'torba'
-```
-
-### Rails
-
-in boot.rb
-
-```diff
- require 'bundler/setup' # Set up gems listed in the Gemfile.
-+require 'torba/verify'
-```
-
-in config/application.rb
-
-```diff
- # Require the gems listed in Gemfile, including any gems
- # you've limited to :test, :development, or :production.
- Bundler.require(*Rails.groups)
-+
-+require 'torba/rails'
 ```
 
 ## Usage
@@ -87,13 +78,7 @@ in config/application.rb
 3. Add "require" [Sprockets directives][sprockets-directives] to your "application.js"
 and/or "@import" [Sass directives][sass-import] to "application.css".
 
-4. Non JS/CSS assets are automatically added to precompile list, nothing to do here.
-
 If any changes made to the Torbafile, run `bundle exec torba pack` again.
-
-### Examples
-
-See fully configured [Rails application][rails-example].
 
 ### Torbafile
 
@@ -179,6 +164,10 @@ You can omit the name, it will be equal to the package name:
 npm package: "coffee-script", version: "1.9.2"
 ```
 
+### Examples
+
+See [Torbafiles][torbafile-examples] used for testing.
+
 ### "Packing the torba" process
 
 When you run `torba pack` the following happens:
@@ -248,58 +237,6 @@ gh_release "lightslider", source: "sachinchoolur/lightslider", tag: "1.1.2", imp
 
 In addition to this "path/" is treated as a shortcut for "path/**/*" glob pattern.
 
-Be careful to **import only that you really need**. Everything that is non JS or CSS asset is
-going to be precompiled by Sprockets and accessible publicly. See [Rails ticket][rails-ticket-vendoring]
-that explains this problem (and why Rails >= 4 precompiles only application.js/css in vendor by
-default), except that Torba does have a way to specify exact list of files to import.
-
-## Deployment
-
-In Rails apps, Torba automatically hooks into the existing `assets:precompile`
-Rake task to ensure that `torba pack` is executed. This means that Rails
-deployments will "just work", although there are some optimizations you can make
-as explained below.
-
-### Heroku
-
-You will need to specify some config vars to ensure Torba's files are placed in
-locations suitable for the Heroku platform.
-
-`TORBA_HOME_PATH` should be within your app so that Torba's assets are included
-in the slug.
-
-`TORBA_CACHE_PATH` should make use of the `tmp/cache/assets` directory. This is
-where the Ruby buildpack expects cached files to be stored related to the
-`assets:precompile` step. This way Torba doesn't have to download packages fresh
-every time.
-
-```bash
-heroku config:set TORBA_HOME_PATH=vendor/torba TORBA_CACHE_PATH=tmp/cache/assets/torba
-```
-
-Now your Heroku app is good to go.
-
-### Capistrano
-
-Specify the `TORBA_HOME_PATH` env variable pointing to a persistent directory
-writable by your deploy user and shared across releases. Capistrano's `shared`
-directory is good for this.
-
-For Capistrano 3, you can set this up in `config/deploy.rb`:
-```
-set :default_env, { torba_home_path: shared_path.join('vendor/torba') }
-```
-
-### Troubleshooting
-
-If you are getting an error like `Your Torba is not packed yet` when trying to
-run `rake assets:precompile` (or `bin/rails assets:precompile` in Rails 5),
-set the `TORBA_DONT_VERIFY` environment variable, like this:
-
-```bash
-TORBA_DONT_VERIFY=1 bin/rake assets:precompile
-```
-
 [bower]: http://bower.io/
 [sprockets]: https://github.com/rails/sprockets/
 [sprockets-load-path]: https://github.com/rails/sprockets#the-load-path
@@ -310,6 +247,7 @@ TORBA_DONT_VERIFY=1 bin/rake assets:precompile
 [rails-assets]: https://rails-assets.org/
 [bower-rails]: https://github.com/rharriso/bower-rails
 [semver]: http://semver.org/
-[rails-ticket-vendoring]: https://github.com/rails/rails/pull/7968
 [npm]: https://npmjs.com
-[rails-example]: https://github.com/torba-rb/rails-example
+[torba-rails-github]: https://github.com/torba-rb/torba-rails
+[sinatra-example]: https://github.com/xfalcox/sinatra-assets-seed
+[torbafile-examples]: https://github.com/torba-rb/torba/tree/master/test/fixtures/torbafiles

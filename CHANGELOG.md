@@ -1,8 +1,32 @@
 ## Unreleased
 
+### Breaking changes
+
+* Rails support has been removed. Use [torba-rails][torba-rails] instead.
+* `torba/verify` no longer checks, whether it is executed within Rake task
+  or not. This was a workaround for Rails support, which is no longer a goal
+  of this gem.
+* `torba/verify` no longer checks `TORBA_DONT_VERIFY` env variable. Same as
+  above.
+
+### Upgrading notes
+
+If you are a non-Rails user, this should be a non-breaking update. In rare cases,
+when you depend on old behaviour of `torba/verify`, please, add the conditionals
+to your application code.
+
+Rails users should:
+
+1. Replace `gem "torba"` with `gem "torba-rails"` in the Gemfile.
+2. Remove `require "torba/verify"` from `boot.rb`.
+3. Remove `require "torba/rails"` from `application.rb`.
+4. Unset obsolete `TORBA_DONT_VERIFY` env variable if present.
+
 ### Enhancements
 
 * Rake task accepts a block to be executed before packing process
+
+[torba-rails]: https://github.com/torba-rb/torba-rails
 
 ## Version 0.7.0
 
