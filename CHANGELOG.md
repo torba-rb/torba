@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 1.0.0
+
 ### Breaking changes
 
 * Rails support has been removed. Use [torba-rails][torba-rails] instead.
