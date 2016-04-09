@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Enhancements
+
+* Rake task accepts a block to be executed before packing process
+
 ## Version 0.7.0
 
 ### Enhancements

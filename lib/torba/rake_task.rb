@@ -18,6 +18,12 @@ module Torba
   #   require "torba/rake_task"
   #   Torba::RakeTask.new("torba:pack", :before => "assets:precompile")
   #
+  # You can also provide a block, which will be executed before packing process:
+  #
+  #   Torba::RakeTask.new do
+  #     # some preconfiguration to be run when the "torba:pack" task is executed
+  #   end
+  #
   # Note that when you require "torba/rails" in a Rails app, this Rake task is
   # installed for you automatically. You only need to install the task yourself
   # if you are using something different, like Sinatra.
@@ -25,17 +31,18 @@ module Torba
   class RakeTask < Rake::TaskLib
     attr_reader :torba_pack_task_name
 
-    def initialize(name="torba:pack", options={})
+    def initialize(name="torba:pack", options={}, &before_pack)
       @torba_pack_task_name = name
-      define_task
+      define_task(before_pack)
       install_as_prerequisite(options[:before]) if options[:before]
     end
 
     private
 
-    def define_task
+    def define_task(before_pack_proc)
       desc "Download and prepare all packages defined in Torbafile"
       task torba_pack_task_name do
+        before_pack_proc.call if before_pack_proc
         Torba.pretty_errors { Torba.pack }
       end
     end

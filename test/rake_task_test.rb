@@ -34,6 +34,19 @@ module Torba
       Rake::Task["torba:pack"].invoke
     end
 
+    def test_calls_a_block_before_torba_pack
+      Rake::Task.clear
+
+      configuration = Object.new
+
+      order = sequence("correct order")
+      configuration.expects(:setup).in_sequence(order)
+      Torba.expects(:pack).in_sequence(order)
+
+      task = Torba::RakeTask.new("torba:pack") { configuration.setup }
+      Rake::Task["torba:pack"].invoke
+    end
+
     def test_defines_task_if_doesnt_exist
       Rake::Task.clear
       Torba::RakeTask.new("torba:pack", :before => "something:else")
