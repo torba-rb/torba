@@ -25,7 +25,7 @@ module Torba
 
           tempfile = GetFile.process(url)
 
-          command = "gzip -qcd #{tempfile.path} | tar -mxpf - --strip-components=1 -C #{cache_path}"
+          command = "gzip -qcd #{tempfile.path} | tar --no-same-owner -mxpf - --strip-components=1 -C #{cache_path}"
           system(command) || raise(Errors::ShellCommandFailed.new(command))
         end
       rescue
