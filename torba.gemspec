@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "torba"
-  spec.version       = "1.0.0"
+  spec.version       = "1.0.1"
   spec.authors       = ["Andrii Malyshko"]
   spec.email         = ["mail@nashbridges.me"]
   spec.description   = "Bundler for Sprockets"

@@ -1,5 +1,11 @@
 ## Unreleased
 
+## Version 1.0.1
+
+### Bug fixes
+
+* Fix unpacking tar.gz when running on unpriveleged containers
+
 ## Version 1.0.0
 
 ### Breaking changes
