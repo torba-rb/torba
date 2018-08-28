@@ -4,7 +4,7 @@ require "torba/remote_sources/common"
 
 require "minitest/autorun"
 require "minitest/assert_dirs_equal"
-require "mocha/mini_test"
+require "mocha/minitest"
 require "tmpdir"
 require "fileutils"
 require "open3"
