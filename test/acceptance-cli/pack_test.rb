@@ -2,6 +2,14 @@ require "test_helper"
 
 module Torba
   class PackTest < Minitest::Test
+    def test_nested
+      out, err, status = torba("pack", torbafile: "05_nested.rb")
+      assert status.success?, err
+      assert_includes out, "Torba has been packed!"
+      assert_dirs_equal "test/fixtures/home_path/01", path_to_packaged("trumbowyg")
+      assert_dirs_equal "test/fixtures/home_path/02", path_to_packaged("lo_dash")
+    end
+
     def test_zip
       out, err, status = torba("pack", torbafile: "01_zip.rb")
       assert status.success?, err
