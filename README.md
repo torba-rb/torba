@@ -200,6 +200,16 @@ duplication:
 4.  Stylesheets (if any) are converted to ".css.erb" with "asset_path" helpers used in "url(...)"
 statements.
 
+#### Nesting
+
+You can create separated _Torbafile_, for example, `<project>/shared/Torbafile` and include it via `require` directive using relative path.
+
+In `<project>/Torbafile`:
+
+```ruby
+#= require shared/Torbafile
+```
+
 ### :import option
 
 Copying whole remote source's content has the disadvantage of using remote source specific paths in your
