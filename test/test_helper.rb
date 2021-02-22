@@ -4,7 +4,7 @@ require "torba/remote_sources/common"
 
 require "minitest/autorun"
 require "minitest/assert_dirs_equal"
-require "mocha/mini_test"
+require "mocha/minitest"
 require "tmpdir"
 require "fileutils"
 require "open3"
@@ -49,7 +49,7 @@ module Torba
       end
 
       def path_to_packaged(name, home = torba_tmp_dir)
-        path = Dir.glob("#{home}/*").grep(Regexp.new(name)).first
+        path = Dir.glob("#{home}/*").sort.grep(Regexp.new(name)).first
         assert path, "Couldn't find packaged #{name.inspect} in #{home.inspect}"
         path
       end

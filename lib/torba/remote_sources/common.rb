@@ -10,7 +10,7 @@ module Torba
       def [](pattern)
         ensure_cached
 
-        Dir.glob(File.join(cache_path, pattern)).reject{ |path| File.directory?(path) }.map do |path|
+        Dir.glob(File.join(cache_path, pattern)).sort.reject{ |path| File.directory?(path) }.map do |path|
           [File.absolute_path(path), path.sub(/#{cache_path}\/?/, "")]
         end
       end
