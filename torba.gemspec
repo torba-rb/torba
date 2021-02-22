@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "bin"
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "thor", "~> 0.19.1"
+  spec.add_dependency "thor", ">= 0.19.1", "< 2"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
