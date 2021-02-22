@@ -1,5 +1,7 @@
 ## Unreleased
 
+## Version 1.1.0
+
 ### Enhancements
 
 * Thor dependency has been relaxed to support Rails 6.x.
