@@ -21,6 +21,12 @@ module Torba
     # all packages defined in Torbafile
     attr_reader :packages
 
+    # Allowed:
+    #   #= require foo/bar
+    #   # =require foo/bar
+    #   #= require "foo/bar"
+    REQUIRE_PATTERN = /^#\s?=\s?require\s["']?(.*)["']?$/
+
     # Reads Torbafile and evaluates it.
     # @return [Manifest]
     #
@@ -33,9 +39,21 @@ module Torba
       file_path ||= File.join(Dir.pwd, "Torbafile")
 
       manifest = new
-      content = File.read(file_path)
-      manifest.instance_eval(content, file_path)
+      manifest.build(file_path)
       manifest
+    end
+
+    # Reads Torbafile and evaluates it.
+    # @param file_path [String] absolute path to Torbafile
+    # @return [Manifest]
+    def build(file_path)
+      content = File.read(file_path)
+      content.lines.each do |line|
+        next unless child_path = line[REQUIRE_PATTERN, 1]
+        build File.join(File.dirname(file_path), child_path)
+      end
+      instance_eval(content, file_path)
+      self
     end
 
     def initialize
