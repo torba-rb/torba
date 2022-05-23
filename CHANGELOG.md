@@ -1,5 +1,12 @@
 ## Unreleased
 
+## Version 1.1.1
+
+### Enhancements
+
+* Test files have been removed from the package to reduce
+file size (and to spend less internet traffic too).
+
 ## Version 1.1.0
 
 ### Enhancements

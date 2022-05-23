@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "torba"
-  spec.version       = "1.1.0"
+  spec.version       = "1.1.1"
   spec.authors       = ["Andrii Malyshko"]
   spec.email         = ["mail@nashbridges.me"]
   spec.description   = "Bundler for Sprockets"
@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/torba-rb/torba"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = `git ls-files`.split($/).grep_v(%r{^test/})
   spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.bindir        = "bin"
   spec.require_paths = ["lib"]
 
