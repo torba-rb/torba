@@ -30,5 +30,12 @@ module Torba
     def test_digest_contains_repository_name
       assert_match /^coffee-script-/, remote.digest
     end
+
+    def test_scoped_repo
+      remote = RemoteSources::Npm.new("@lottiefiles/lottie-player", "2.0.2")
+      assert_equal "@lottiefiles/lottie-player", remote.package
+      assert_equal "2.0.2", remote.version
+      assert_equal "https://registry.npmjs.org/@lottiefiles/lottie-player/-/lottie-player-2.0.2.tgz", remote.url
+    end
   end
 end
