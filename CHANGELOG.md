@@ -1,5 +1,11 @@
 ## Unreleased
 
+## Version 1.2.0
+
+### Enhancements
+
+* Support scoped names for NPM packages (e.g. "@lottiefiles/lottie-player")
+
 ## Version 1.1.1
 
 ### Enhancements
