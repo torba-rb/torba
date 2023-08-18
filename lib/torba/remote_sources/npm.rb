@@ -8,6 +8,7 @@ module Torba
       # @return [String] package name.
       # @example
       #   "coffee-script"
+      #   "@lottiefiles/lottie-player"
       attr_reader :package
 
       # @return [String] package version.
@@ -20,7 +21,12 @@ module Torba
       def initialize(package, version)
         @package = package
         @version = version
-        super("https://registry.npmjs.org/#{package}/-/#{package}-#{version}.tgz")
+
+        # https://docs.npmjs.com/about-scopes
+        # "@lottiefiles/lottie-player" => "lottie-player"
+        unscoped_package = package.sub(%r{@[^/]+/}, "")
+
+        super("https://registry.npmjs.org/#{package}/-/#{unscoped_package}-#{version}.tgz")
         @digest = "#{package}-#{Torba.digest(url)}"
       end
     end

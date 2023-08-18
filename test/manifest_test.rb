@@ -80,6 +80,11 @@ module Torba
       assert_equal "coffee-script", package.name
     end
 
+    def test_npm_implicit_scoped_name
+      manifest.npm package: "@lottiefiles/lottie-player", version: "1.8.3"
+      assert_equal "@lottiefiles/lottie-player", package.name
+    end
+
     def test_npm_wo_package
       assert_raises(KeyError) do
         manifest.npm version: "1.8.3"
